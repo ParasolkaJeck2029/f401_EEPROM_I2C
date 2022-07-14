@@ -14,8 +14,11 @@
 #include <math.h>
 #include <stdio.h>
 
-s
+#define AT24_I2C_HANDLER hi2c1
 
+#define AT24_DEV_ADDR 0xA0
 
+uint8_t at24_check_connect();
+void Error();
 
 #endif /* INC_AT24C256_H_ */

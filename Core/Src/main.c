@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "UART_config.h"
+#include "AT24C256.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,6 +99,10 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  printf("Start work with AT24C256\r\n\r\n");
+  uint8_t status;
+  status = at24_check_connect();
+  printf("status at24: 0x%x\r\n", status);
   while (1)
   {
     /* USER CODE END WHILE */
