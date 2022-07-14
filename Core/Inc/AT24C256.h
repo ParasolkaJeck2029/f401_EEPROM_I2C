@@ -28,3 +28,4 @@ void AT24_WriteByte(uint16_t addr, uint8_t data);
 void AT24_ReadReg(uint16_t reg, uint8_t * result);
 void AT24_WriteReg(uint16_t reg, uint8_t * value);
 #endif /* INC_AT24C256_H_ */
+

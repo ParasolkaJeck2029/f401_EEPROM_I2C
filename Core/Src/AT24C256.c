@@ -40,11 +40,14 @@ void AT24_WriteReg(uint16_t reg, uint8_t * value){
 
 void AT24_WriteByte(uint16_t addr, uint8_t data){
 	uint8_t ansver =200;
+	/*
 	HAL_I2C_Master_Transmit(&hi2c1, AT24_DEV_ADDR, &addr, 1, 1000);
-	//HAL_I2C_Master_Transmit(&hi2c1, AT24_DEV_ADDR, &addr, 1, 1000);
+	HAL_I2C_Master_Transmit(&hi2c1, AT24_DEV_ADDR, &addr, 1, 1000);
 
 	HAL_I2C_Master_Receive(&hi2c1, AT24_DEV_ADDR, &ansver, 1, 1000);
 	printf("Answer: %d\r\n", ansver);
+	*/
+
 }
 
 void Error(){
