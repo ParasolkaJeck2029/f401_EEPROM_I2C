@@ -114,8 +114,9 @@ int main(void)
   printf("result: %d\r\n", result);
   uint32_t write_uint32 = 0xABCDE, read_uint32 = 1;
   AT24_PutData(10, 0, &write_uint32, sizeof(write_uint32));
-  AT24_GetData(10, 0, &read_uint32, sizeof(uint32_t));
-  printf("Readed uint32_t : 0x%x\r\n", read_uint32);
+  AT24_GetData(10, 0, &read_uint32, sizeof(write_uint32));
+  printf("Read uint32_t : 0x%x\r\n", read_uint32);
+
   while (1)
   {
     /* USER CODE END WHILE */
