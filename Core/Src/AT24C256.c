@@ -43,6 +43,15 @@ void AT24_ReadByte(uint16_t page, uint16_t addr, uint8_t * result){
 	uint16_t mem_address = page<<page_add_position | addr;
 	HAL_I2C_Mem_Read(&hi2c1, AT24_DEV_ADDR, mem_address, I2C_MEMADD_SIZE_16BIT, result, 1, 1000);
 }
+void AT24_WriteByte_GlobalAddr(uint16_t addr, uint8_t data){
+
+	HAL_I2C_Mem_Write(&AT24_I2C_HANDLER, AT24_DEV_ADDR, addr, I2C_MEMADD_SIZE_16BIT, &data, 1, 1000);
+	HAL_Delay(5);
+}
+void AT24_ReadByte_GlobalAddr(uint16_t addr, uint8_t * result){
+	HAL_I2C_Mem_Read(&AT24_I2C_HANDLER, AT24_DEV_ADDR, addr, I2C_MEMADD_SIZE_16BIT, result, 1, 1000);
+
+}
 void Error(){
 	printf("Error\r\n");
 }

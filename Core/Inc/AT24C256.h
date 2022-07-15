@@ -29,5 +29,7 @@ uint8_t I2Cx_ReadData(uint16_t addr, uint16_t reg, uint8_t * result);
 void AT24_WriteByte(uint16_t page, uint16_t addr, uint8_t data);
 void AT24_ReadByte(uint16_t page, uint16_t addr, uint8_t * result);
 
+void AT24_WriteByte_GlobalAddr(uint16_t addr, uint8_t data);
+void AT24_ReadByte_GlobalAddr(uint16_t addr, uint8_t * result);
 #endif /* INC_AT24C256_H_ */
 
