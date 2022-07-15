@@ -21,6 +21,8 @@
 #define AT24_PAGE_SIZE 64
 #define AT24_PAGE_COUNT 256
 
+#define USE_FREERTOS 0
+
 uint8_t at24_check_connect();
 void Error();
 uint8_t I2Cx_WriteData(uint16_t addr, uint16_t reg, uint8_t * value);
@@ -31,5 +33,10 @@ void AT24_ReadByte(uint16_t page, uint16_t addr, uint8_t * result);
 
 void AT24_WriteByte_GlobalAddr(uint16_t addr, uint8_t data);
 void AT24_ReadByte_GlobalAddr(uint16_t addr, uint8_t * result);
+
+void AT24_PutData(uint16_t page, uint16_t addr, uint8_t * data, uint16_t size);
+void AT24_GetData(uint16_t page, uint16_t addr, uint8_t * result, uint16_t size);
+
+void AT24_Erase_Page(uint16_t page);
 #endif /* INC_AT24C256_H_ */
 
