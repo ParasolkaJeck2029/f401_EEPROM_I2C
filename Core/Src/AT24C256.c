@@ -141,10 +141,40 @@ void AT24_GetData(uint16_t page, uint16_t addr, uint8_t * result, uint16_t size)
 }
 
 void AT24_Erase_Page(uint16_t page){
+	int page_add_position = log(AT24_PAGE_SIZE)/log(2);
+	uint16_t mem_address = page<<page_add_position;
 	uint8_t erase_array[AT24_PAGE_SIZE];
 	memset(erase_array, 0xff, AT24_PAGE_SIZE);
-	AT24_PutData(page, 0, erase_array, sizeof(erase_array));
+	printf("\r\n");
+	for (uint8_t i = 0; i < 8; i++){
+		  printf("#%d ", i);
+		  for(uint8_t j = 0; j < 8; j++){
+			  printf("0x%x ", erase_array[(i+1)*j]);
+		  }
+		  printf("\r\n");
+	  }
+	  printf("\r\n");
+	HAL_I2C_Mem_Write(&AT24_I2C_HANDLER, AT24_DEV_ADDR, mem_address, I2C_MEMADD_SIZE_16BIT, erase_array, AT24_PAGE_SIZE, 1000);
 
+#if(USE_FREERTOS == 0)
+		HAL_Delay(5);
+#else
+		osDelay(5);
+#endif
+
+}
+
+void AT24_PrintfPage(uint16_t page){
+	uint8_t page_content[AT24_PAGE_SIZE];
+	AT24_GetData(1, 0, page_content, sizeof(AT24_PAGE_SIZE));
+	printf("\r\n");
+	for (uint8_t i = 0; i < 8; i++){
+	  printf("#%d ", i);
+	  for(uint8_t j = 0; j < 8; j++){
+		  printf("0x%x ", page_content[(i+1)*j]);
+	  }
+	  printf("\r\n");
+	}
 }
 void Error(){
 	printf("Error\r\n");

@@ -117,15 +117,10 @@ int main(void)
   AT24_GetData(10, 0, &read_uint32, sizeof(write_uint32));
   printf("Read uint32_t : 0x%x\r\n", read_uint32);
 
-  AT24_Erase_Page(10);
-  uint8_t page_content[AT24_PAGE_SIZE];
-  AT24_GetData(10, 0, page_content, sizeof(AT24_PAGE_SIZE));
-  for (uint8_t i = 0; i < 8; i++){
-	  printf("#%d ", i);
-	  for(uint8_t j = 0; j < 8; j++){
-		  printf("0x%x ", page_content[(i+1)*j]);
-	  }
-	  printf("\r\n");
+  AT24_Erase_Page(1);
+  for (uint16_t i = 0; i < 256; i ++){
+	  printf("Page# %d", i);
+	  AT24_PrintfPage(i);
   }
   while (1)
   {

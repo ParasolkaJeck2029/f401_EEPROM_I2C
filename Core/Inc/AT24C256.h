@@ -37,6 +37,8 @@ void AT24_ReadByte_GlobalAddr(uint16_t addr, uint8_t * result);
 void AT24_PutData(uint16_t page, uint16_t addr, uint8_t * data, uint16_t size);
 void AT24_GetData(uint16_t page, uint16_t addr, uint8_t * result, uint16_t size);
 
+void AT24_PrintfPage(uint16_t page);
+
 void AT24_Erase_Page(uint16_t page);
 #endif /* INC_AT24C256_H_ */
 
