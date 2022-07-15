@@ -29,27 +29,20 @@ uint8_t I2Cx_ReadData(uint16_t addr, uint16_t reg, uint8_t * result){
 	return res;
 }
 
-void AT24_ReadReg(uint16_t reg, uint8_t * result){
-	I2Cx_ReadData(AT24_DEV_ADDR, reg, result);
-}
 
-
-void AT24_WriteReg(uint16_t reg, uint8_t * value){
-	I2Cx_WriteData(AT24_DEV_ADDR, reg, value);
-}
-
-void AT24_WriteByte(uint16_t addr, uint8_t data){
-	uint8_t ansver =200;
-	/*
-	HAL_I2C_Master_Transmit(&hi2c1, AT24_DEV_ADDR, &addr, 1, 1000);
-	HAL_I2C_Master_Transmit(&hi2c1, AT24_DEV_ADDR, &addr, 1, 1000);
-
-	HAL_I2C_Master_Receive(&hi2c1, AT24_DEV_ADDR, &ansver, 1, 1000);
-	printf("Answer: %d\r\n", ansver);
-	*/
+void AT24_WriteByte(uint16_t page, uint16_t addr, uint8_t data){
+	int page_add_position = log(AT24_PAGE_SIZE)/log(2);
+	uint16_t mem_address = page<<page_add_position | addr;
+	HAL_I2C_Mem_Write(&hi2c1, AT24_DEV_ADDR, mem_address, I2C_MEMADD_SIZE_16BIT, &data, 1, 1000);
+	HAL_Delay(5);
 
 }
 
+void AT24_ReadByte(uint16_t page, uint16_t addr, uint8_t * result){
+	int page_add_position = log(AT24_PAGE_SIZE)/log(2);
+	uint16_t mem_address = page<<page_add_position | addr;
+	HAL_I2C_Mem_Read(&hi2c1, AT24_DEV_ADDR, mem_address, I2C_MEMADD_SIZE_16BIT, result, 1, 1000);
+}
 void Error(){
 	printf("Error\r\n");
 }

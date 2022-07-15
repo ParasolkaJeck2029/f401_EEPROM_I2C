@@ -105,7 +105,10 @@ int main(void)
   printf("status at24: 0x%x\r\n", status);
 
   uint8_t wr_byte = 123, result = 0;
-  AT24_WriteByte(0x3, wr_byte);
+  //AT24_WriteByte(0x3, wr_byte);
+  AT24_WriteByte(1, 0, 18);
+  AT24_ReadByte(1, 0, &result);
+  printf("result: %d\r\n", result);
   while (1)
   {
     /* USER CODE END WHILE */
