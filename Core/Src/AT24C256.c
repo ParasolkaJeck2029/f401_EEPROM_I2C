@@ -141,6 +141,7 @@ void AT24_GetData(uint16_t page, uint16_t addr, uint8_t * result, uint16_t size)
 }
 
 void AT24_Erase_Page(uint16_t page){
+	/*
 	int page_add_position = log(AT24_PAGE_SIZE)/log(2);
 	uint16_t mem_address = page<<page_add_position;
 	uint8_t erase_array[AT24_PAGE_SIZE];
@@ -155,6 +156,10 @@ void AT24_Erase_Page(uint16_t page){
 	  }
 	  printf("\r\n");
 	HAL_I2C_Mem_Write(&AT24_I2C_HANDLER, AT24_DEV_ADDR, mem_address, I2C_MEMADD_SIZE_16BIT, erase_array, AT24_PAGE_SIZE, 1000);
+	*/
+	for(uint8_t counter = 0; counter < AT24_PAGE_SIZE; counter++){
+		AT24_WriteByte(page, counter, 0xff);
+	}
 
 #if(USE_FREERTOS == 0)
 		HAL_Delay(5);
@@ -163,9 +168,7 @@ void AT24_Erase_Page(uint16_t page){
 #endif
 
 }
-void AT24_PrintfPage(uint16_t page){
-	AT24_PrintfPage(page, 0);
-}
+
 void AT24_PrintfPage(uint16_t page, uint8_t decimal ){
 	for (uint8_t counter = 0; counter < AT24_PAGE_SIZE; counter++){
 		uint8_t data_in_byte;

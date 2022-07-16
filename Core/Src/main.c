@@ -119,18 +119,13 @@ int main(void)
   printf("Read uint32_t : 0x%x\r\n", read_uint32);
 
   AT24_Erase_Page(1);
-  /*
-  for (uint16_t i = 0; i < 256; i ++){
-	  printf("Page# %d", i);
-	  AT24_PrintfPage(i, 0);
-  }
-  */
+  AT24_PrintfPage(1, 0);
   uint8_t array[16];
   for (uint8_t i = 0; i < 16; i++){
 	  array[i] = i * 2;
   }
   AT24_PutData(12, 0, array, 16);
-  AT24_PrintfPage(12, 1);
+  AT24_PrintfPage(12, 0);
   while (1)
   {
     /* USER CODE END WHILE */
