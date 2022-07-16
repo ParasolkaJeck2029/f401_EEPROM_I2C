@@ -163,15 +163,17 @@ void AT24_Erase_Page(uint16_t page){
 #endif
 
 }
-
+void AT24_PrintfPage(uint16_t page){
+	AT24_PrintfPage(page, 0);
+}
 void AT24_PrintfPage(uint16_t page, uint8_t decimal ){
 	for (uint8_t counter = 0; counter < AT24_PAGE_SIZE; counter++){
 		uint8_t data_in_byte;
 		AT24_ReadByte(page, counter, &data_in_byte);
 		if(counter%8 == 0){
-			printf("\r\n#%d: 0x%x ",counter/8, data_in_byte);
+			printf((decimal == 0) ? "\r\n#%d: 0x%x ":"\r\n#%d: %d ",counter/8, data_in_byte);
 		}else{
-			printf("0x%x ", data_in_byte);
+			printf((decimal == 0) ? "0x%x ": "%d ", data_in_byte);
 		}
 	}
 	printf("\r\n");
