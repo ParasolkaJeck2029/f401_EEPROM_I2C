@@ -114,14 +114,23 @@ int main(void)
   printf("result: %d\r\n", result);
   uint32_t write_uint32 = 0xABCDE, read_uint32 = 1;
   AT24_PutData(10, 0, &write_uint32, sizeof(write_uint32));
+  AT24_PrintfPage(10, 0);
   AT24_GetData(10, 0, &read_uint32, sizeof(write_uint32));
   printf("Read uint32_t : 0x%x\r\n", read_uint32);
 
   AT24_Erase_Page(1);
+  /*
   for (uint16_t i = 0; i < 256; i ++){
 	  printf("Page# %d", i);
-	  AT24_PrintfPage(i);
+	  AT24_PrintfPage(i, 0);
   }
+  */
+  uint8_t array[16];
+  for (uint8_t i = 0; i < 16; i++){
+	  array[i] = i * 2;
+  }
+  AT24_PutData(12, 0, array, 16);
+  AT24_PrintfPage(12, 1);
   while (1)
   {
     /* USER CODE END WHILE */

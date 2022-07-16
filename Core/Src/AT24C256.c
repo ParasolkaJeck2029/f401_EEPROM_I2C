@@ -164,17 +164,17 @@ void AT24_Erase_Page(uint16_t page){
 
 }
 
-void AT24_PrintfPage(uint16_t page){
-	uint8_t page_content[AT24_PAGE_SIZE];
-	AT24_GetData(1, 0, page_content, sizeof(AT24_PAGE_SIZE));
-	printf("\r\n");
-	for (uint8_t i = 0; i < 8; i++){
-	  printf("#%d ", i);
-	  for(uint8_t j = 0; j < 8; j++){
-		  printf("0x%x ", page_content[(i+1)*j]);
-	  }
-	  printf("\r\n");
+void AT24_PrintfPage(uint16_t page, uint8_t decimal ){
+	for (uint8_t counter = 0; counter < AT24_PAGE_SIZE; counter++){
+		uint8_t data_in_byte;
+		AT24_ReadByte(page, counter, &data_in_byte);
+		if(counter%8 == 0){
+			printf("\r\n#%d: 0x%x ",counter/8, data_in_byte);
+		}else{
+			printf("0x%x ", data_in_byte);
+		}
 	}
+	printf("\r\n");
 }
 void Error(){
 	printf("Error\r\n");
